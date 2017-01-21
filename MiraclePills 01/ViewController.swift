@@ -8,18 +8,96 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
+{
 
-    override func viewDidLoad() {
+    @IBOutlet weak var statePicker: UIPickerView!
+    
+    @IBOutlet weak var countryPicker: UIPickerView!
+    
+    @IBOutlet weak var stateBtnTitle: UIButton!
+    
+    @IBOutlet weak var countryBtnTitle: UIButton!
+    
+    let states = ["Alabama","Arkansas","Alaska","Arizona","Conneticut","Colorado","California","Hawaii","Illinois"]
+    let countries = ["Cantada","Columbia","Cambodia","Chili","Cuba","China","Cyprus"]
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+        statePicker.dataSource = self
+        statePicker.delegate = self
+        countryPicker.dataSource = self
+        countryPicker.delegate = self
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+//    var rowCount = 0
+//    var btnTitleNew = ""
+//    var location: [String] = []
+    @IBAction func countryButton(_ sender: UIButton)
+    {
+        countryPicker.isHidden = false
+        statePicker.isHidden = true
+//        location = countries
+//        rowCount = countries.count
     }
+    
+    @IBAction func stateButton(_ sender: UIButton)
+    {
+        statePicker.isHidden = false
+        countryBtnTitle.isHidden = true
+        countryPicker.isHidden = true
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
+    {
+        if pickerView == statePicker
+        {
+            return states.count
+            
+        } else if pickerView == countryPicker
+        {
+            return countries.count
+        }
+        return 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
+    {
+        if pickerView == statePicker
+        {
+            return states[row]
+            
+        } else if pickerView == countryPicker
+        {
+            return countries[row]
+        }
+        return "error"
 
-
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        if pickerView == statePicker {
+            stateBtnTitle.setTitle(self.states[row], for: UIControlState.normal)
+            statePicker.isHidden = true
+            countryBtnTitle.isHidden = false
+        } else if pickerView == countryPicker
+        {
+            countryBtnTitle.setTitle(self.countries[row], for: UIControlState.normal)
+            countryPicker.isHidden = true
+        }
+    }
+//    override func didReceiveMemoryWarning()
+//    {
+//        super.didReceiveMemoryWarning()
+//        // Dispose of any resources that can be recreated.
+//    }
 }
 
