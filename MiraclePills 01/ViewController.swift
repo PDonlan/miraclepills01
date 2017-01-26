@@ -19,6 +19,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet weak var countryBtnTitle: UIButton!
     
+    @IBOutlet weak var enterZipCode: UITextField!
+    
+    @IBOutlet weak var enterZipCodeLabel: UILabel!
+    
+    @IBOutlet weak var buyNowBtn: UIImageView!
     let states = ["Alabama","Arkansas","Alaska","Arizona","Conneticut","Colorado","California","Hawaii","Illinois"]
     let countries = ["Cantada","Columbia","Cambodia","Chili","Cuba","China","Cyprus"]
     
@@ -39,8 +44,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     {
         countryPicker.isHidden = false
         statePicker.isHidden = true
-//        location = countries
-//        rowCount = countries.count
+        enterZipCode.isHidden = true
+        enterZipCodeLabel.isHidden = true
+        buyNowBtn.isHidden = true
+        
     }
     
     @IBAction func stateButton(_ sender: UIButton)
@@ -48,6 +55,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         statePicker.isHidden = false
         countryBtnTitle.isHidden = true
         countryPicker.isHidden = true
+        enterZipCode.isHidden = true
+        enterZipCodeLabel.isHidden = true
+        buyNowBtn.isHidden = true
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int
@@ -93,6 +103,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             countryBtnTitle.setTitle(self.countries[row], for: UIControlState.normal)
             countryPicker.isHidden = true
         }
+        enterZipCode.isHidden = false
+        enterZipCodeLabel.isHidden = false
+        buyNowBtn.isHidden = false
     }
 //    override func didReceiveMemoryWarning()
 //    {
